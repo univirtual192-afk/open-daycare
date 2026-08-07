@@ -34,6 +34,13 @@ Treat these as the visual spec; the app should reproduce their layout/content.
 ## Skills - Spec Driven Development
 - `spec` and `spec-impl` are installed (see `skills-lock.json` + `.agents/skills/`). Use `spec` to design a spec for new features before coding, then `spec-impl` to implement an approved spec on its own branch.
 
+## Agents - Subagentes personalizados
+- **spec-verifier** (`.opencode/agent/spec-verifier.md`): verifica los criterios de aceptación de un spec. Lee el spec, revisa código, ejecuta comandos (lint, tsc, build), usa Playwright para validar UI y compara screenshots. Marca los checkboxes `[x]` / `[ ]` según el resultado.
+
+## Comandos de verificación
+- `npx tsc --noEmit` — chequeo de tipos TypeScript
+- Verification order before committing: `lint` -> `tsc --noEmit` -> `build`
+
 ## Reglas de codigo
 
 - Usar codigo limpio, nombres, funciones y variables, etc. en ingles
