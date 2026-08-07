@@ -1,6 +1,6 @@
 # SPEC 01 — Feed (Home `/`) sin persistencia
 
-**State:** Draft
+**State:** Approved
 **Depends on:** —
 **Date:** 2026-08-06
 
@@ -37,32 +37,34 @@
 No introduce nuevas estructuras de datos persistentes. El array de publicaciones está hardcodeado en `app/page.tsx` con esta forma:
 
 ```ts
-type PostType = "logro" | "actividad" | "anuncio";
+type PostType = "achievement" | "activity" | "announcement";
 
 interface FeedPost {
   id: string;
-  author: string;        // "Mateo" | "Anuncio general"
-  initial: string;       // "M" | icon para anuncio
-  avatarBg: string;      // "#A9D9E8" | "#CCD8F4"
-  avatarColor: string;   // "#1F7A93" | "#4E72C8"
-  time: string;          // "14:20"
-  publishedBy: string;   // "publicado por vos"
-  type: PostType;
-  audience: string;     // "familia de Mateo" | "toda la sala"
-  content: string;       // texto del post
+  author: string;          // "Mateo" | "Anuncio general"
+  initial: string;         // "M" | icon para anuncio
+  avatarBg: string;        // "#A9D9E8" | "#CCD8F4"
+  avatarColor: string;     // "#1F7A93" | "#4E72C8"
+  time: string;            // "14:20"
+  publishedByLabel: string; // "publicado por vos"
+  type: PostType;          // interno en inglés
+  audience: string;       // "familia de Mateo" | "toda la sala"
+  content: string;         // texto del post (es-ES visible)
   likes: number;
   comments: number;
   hasPhoto?: boolean;
-  photoLabel?: string;   // "Foto · pintando con témperas"
+  photoLabel?: string;     // "Foto · pintando con témperas"
 }
 ```
+
+**Convención de idioma (regla del proyecto):** todo el código interno (tipos, props, variables, nombres de archivo, functions) va en **inglés**. Solo el contenido visible al usuario (labels de badges como "LOGRO"/"ACTIVIDAD"/"ANUNCIO", textos de posts, `audience`, `content`, `photoLabel`) queda en **español**. El `PostBadge` mapea `type` interno al label visual español: `achievement`→"LOGRO", `activity`→"ACTIVIDAD", `announcement`→"ANUNCIO".
 
 ## Implementation plan
 
 1. Configurar `next/font/google` para Fredoka y Nunito en `app/layout.tsx`, exponiéndolas para usar en `globals.css` y componentes.
 2. Agregar tokens de color del draft (paleta cálido `#F6ECDF`, `#FFFDF9`, `#ECE0D0`, acentos `#F4977E`, `#D9583C`, etc.) como variables en `app/globals.css` dentro del bloque `@theme inline`.
 3. Crear `app/components/feed/Avatar.tsx` con props `initial`, `bg`, `color`.
-4. Crear `app/components/feed/PostBadge.tsx` con props `type`, mapea a color de fondo/dot/label (LOGRO↔verde, ACTIVIDAD↔azul, ANUNCIO↔lila).
+4. Crear `app/components/feed/PostBadge.tsx` con props `type`: `"achievement" | "activity" | "announcement"`, mapea a color de fondo/dot y label visual en español (LOGRO↔verde, ACTIVIDAD↔azul, ANUNCIO↔lila).
 5. Crear `app/components/feed/PostActions.tsx` con props `likes`, `comments` (SVG inline de corazón y comentario).
 6. Crear `app/components/feed/PhotoPlaceholder.tsx` con SVG de imagen y `label` opcional.
 7. Crear `app/components/feed/PostCard.tsx` que compone Avatar + PostBadge + contenido + PhotoPlaceholder (condicional) + PostActions.
@@ -80,6 +82,7 @@ interface FeedPost {
 - [ ] Existe el saludo "Buenas, Caro" con eyebrow "GUARDERÍA · SALA SOLES" y sub "12 niños · martes 17 jun".
 - [ ] La caja "Compartí un momento…" con avatar C y botón cámara está presente.
 - [ ] Se renderizan exactamente 3 posts: 1 LOGRO (verde, Mateo, sin foto), 1 ACTIVIDAD (azul, Mateo, con placeholder de foto), 1 ANUNCIO (lila, "Anuncio general", sin foto).
+- [ ] Los labels visuales de badges están en español ("LOGRO"/"ACTIVIDAD"/"ANUNCIO") aunque los `type` internos sean `"achievement"`/`"activity"`/`"announcement"`.
 - [ ] Cada post muestra Avatar, badge de tipo, línea "Para: …", contenido, contador de likes y comentarios.
 - [ ] Los enlaces del sidebar que no son Feed son inertes (no navegan, no rompen).
 - [ ] Los botones Nueva publicación / Compartí un momento / Editar / like / comentario tienen estados hover visuales pero no ejecutan nada.
@@ -96,6 +99,7 @@ interface FeedPost {
 - **SVG inline copiados del draft** en lugar de `lucide-react` — coincidencia pixel-perfect y sin dependencia nueva.
 - **Descartado:** responsivo mobile — defer a spec posterior; el layout actual reproduce el draft desktop.
 - **Descartado:** cualquier lógica de like/comentario/publicar — fuera de scope ("solo el estilo").
+- **Idioma del código vs. UI:** el código interno (tipos, props, variables, archivos) está en inglés siguiendo la regla de código limpio del proyecto; solo el texto visible al usuario y los labels de badges quedan en español. `PostType` quedó como `"achievement" | "activity" | "announcement"` y el `PostBadge` mapea cada valor al label español correspondiente.
 
 ## Riesgos identificados
 
