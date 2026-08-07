@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Reference drafts (not shipped code) — do not edit per AGENTS.md
+    "references/**",
   ]),
 ]);
 
