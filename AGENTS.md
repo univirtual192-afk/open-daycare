@@ -8,5 +8,32 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
+## Stack versions (newer than training data)
+- Next.js **16.3.0**, React **19.2.8**, TypeScript ^5, Tailwind **v4**, ESLint **9** flat config. Do not trust memorized APIs — verify against `node_modules/next/dist/docs/` or use the Context7 MCP.
+- Tailwind v4 via `@tailwindcss/postcss`; `app/globals.css` uses `@import "tailwindcss";` and `@theme inline { ... }`. There is **no** `tailwind.config.js` — theme keys live in `globals.css`.
+
+## Commands
+- `npm run dev` — dev server at http://localhost:3000
+- `npm run build` — production build
+- `npm run lint` — ESLint (flat config; no positional args needed)
+- No dedicated typecheck script. Run TS check with: `npx tsc --noEmit` (tsconfig has `noEmit: true`)
+- Verification order before committing: `lint` -> `tsc --noEmit` -> `build`
+
+## Path alias
+- `@/*` maps to repo root (e.g. `@/app/page.tsx`). Prefer relative imports inside `app/`.
+
+## Reference materials (do not edit)
+- `references/pantallas/*.dc.html` — design drafts for each screen (login, feed, ninos, post-detail, etc.).
+- `references/screenshots/*.png` — visual references matching the drafts.
+Treat these as the visual spec; the app should reproduce their layout/content.
+
 ## MCPs
-- Playwright, screenshots y cualquier cosa relacionada con Playwright tienen que estar en la carpeta playwright-mcp.
+- **Playwright**: anything Playwright-related (screenshots, traces, console logs, snapshots) must be saved under `.playwright-mcp/` (gitignored). The MCP is configured in `opencode.json`.
+- **Context7**: use to pull up-to-date framework docs (Next.js, Tailwind, React, etc.) instead of relying on memory.
+
+## Skills - Spec Driven Development
+- `spec` and `spec-impl` are installed (see `skills-lock.json` + `.agents/skills/`). Use `spec` to design a spec for new features before coding, then `spec-impl` to implement an approved spec on its own branch.
+
+## Reglas de codigo
+
+- Usar codigo limpio, nombres, funciones y variables, etc. en ingles
