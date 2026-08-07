@@ -77,19 +77,19 @@ interface FeedPost {
 
 ## Acceptance criteria
 
-- [ ] Al visitar `http://localhost:3000/` se renderiza el feed completo del draft.
-- [ ] El sidebar izquierdo coincide pixel-perfect con el draft (logo, botón, nav, tarjeta de usuario con avatar "C" y botón logout).
-- [ ] Existe el saludo "Buenas, Caro" con eyebrow "GUARDERÍA · SALA SOLES" y sub "12 niños · martes 17 jun".
-- [ ] La caja "Compartí un momento…" con avatar C y botón cámara está presente.
-- [ ] Se renderizan exactamente 3 posts: 1 LOGRO (verde, Mateo, sin foto), 1 ACTIVIDAD (azul, Mateo, con placeholder de foto), 1 ANUNCIO (lila, "Anuncio general", sin foto).
-- [ ] Los labels visuales de badges están en español ("LOGRO"/"ACTIVIDAD"/"ANUNCIO") aunque los `type` internos sean `"achievement"`/`"activity"`/`"announcement"`.
-- [ ] Cada post muestra Avatar, badge de tipo, línea "Para: …", contenido, contador de likes y comentarios.
-- [ ] Los enlaces del sidebar que no son Feed son inertes (no navegan, no rompen).
-- [ ] Los botones Nueva publicación / Compartí un momento / Editar / like / comentario tienen estados hover visuales pero no ejecutan nada.
-- [ ] Las fuentes Fredoka (títulos) y Nunito (cuerpo) cargan vía next/font sin FOUC.
-- [ ] `npm run lint` pasa sin errores.
-- [ ] `npx tsc --noEmit` pasa sin errores.
-- [ ] `npm run build` pasa sin errores.
+- [x] Al visitar `http://localhost:3000/` se renderiza el feed completo del draft.
+- [x] El sidebar izquierdo coincide pixel-perfect con el draft (logo, botón, nav, tarjeta de usuario con avatar "C" y botón logout).
+- [x] Existe el saludo "Buenas, Caro" con eyebrow "GUARDERÍA · SALA SOLES" y sub "12 niños · martes 17 jun".
+- [x] La caja "Compartí un momento…" con avatar C y botón cámara está presente.
+- [x] Se renderizan exactamente 3 posts: 1 LOGRO (verde, Mateo, sin foto), 1 ACTIVIDAD (azul, Mateo, con placeholder de foto), 1 ANUNCIO (lila, "Anuncio general", sin foto).
+- [x] Los labels visuales de badges están en español ("LOGRO"/"ACTIVIDAD"/"ANUNCIO") aunque los `type` internos sean `"achievement"`/`"activity"`/`"announcement"`.
+- [x] Cada post muestra Avatar, badge de tipo, línea "Para: …", contenido, contador de likes y comentarios.
+- [x] Los enlaces del sidebar que no son Feed son inertes (no navegan, no rompen).
+- [x] Los botones Nueva publicación / Compartí un momento / Editar / like / comentario tienen estados hover visuales pero no ejecutan nada.
+- [x] Las fuentes Fredoka (títulos) y Nunito (cuerpo) cargan vía next/font sin FOUC.
+- [x] `npm run lint` pasa sin errores.
+- [x] `npx tsc --noEmit` pasa sin errores.
+- [x] `npm run build` pasa sin errores.
 
 ## Decisiones tomadas y descartadas
 
