@@ -1,8 +1,10 @@
+import Link from "next/link";
 import type { CSSProperties } from "react";
 
 interface SidebarProps {
   className?: string;
   style?: CSSProperties;
+  currentPath?: string;
 }
 
 function LogoMark() {
@@ -35,13 +37,13 @@ function LogoMark() {
 interface NavItemProps {
   label: string;
   active?: boolean;
-  href?: string;
+  href: string;
   children: React.ReactNode;
 }
 
-function NavItem({ label, active = false, href = "#", children }: NavItemProps) {
+function NavItem({ label, active = false, href, children }: NavItemProps) {
   return (
-    <a
+    <Link
       href={href}
       className={`flex items-center gap-3 rounded-[12px] px-3 py-[11px] text-[14.5px] transition-colors ${
         active
@@ -51,7 +53,7 @@ function NavItem({ label, active = false, href = "#", children }: NavItemProps) 
     >
       {children}
       {label}
-    </a>
+    </Link>
   );
 }
 
@@ -117,7 +119,7 @@ const NAV_ICONS = {
   ),
 };
 
-export function Sidebar({ className = "", style }: SidebarProps) {
+export function Sidebar({ className = "", style, currentPath = "" }: SidebarProps) {
   return (
     <aside
       className={`flex flex-col px-4 py-6 sticky top-0 h-screen ${className}`}
@@ -129,8 +131,8 @@ export function Sidebar({ className = "", style }: SidebarProps) {
         ...style,
       }}
     >
-      <a
-        href="#"
+      <Link
+        href="/"
         className="flex items-center gap-[11px] px-2 pb-[22px] pt-1 transition-opacity hover:opacity-80"
       >
         <LogoMark />
@@ -145,9 +147,9 @@ export function Sidebar({ className = "", style }: SidebarProps) {
             Sala Soles
           </div>
         </div>
-      </a>
+      </Link>
 
-      <a
+      <Link
         href="#"
         className="flex items-center justify-center gap-2 w-full px-3 py-3 rounded-[14px] text-white font-extrabold text-[14.5px] mb-[18px] transition-opacity hover:opacity-90"
         style={{
@@ -168,15 +170,29 @@ export function Sidebar({ className = "", style }: SidebarProps) {
           <path d="M12 5v14M5 12h14" />
         </svg>
         Nueva publicación
-      </a>
+      </Link>
 
       <nav className="flex flex-col gap-1 flex-1">
-        <NavItem label="Feed" active>
+        <NavItem
+          label="Feed"
+          active={currentPath === "/" || currentPath === ""}
+          href="/"
+        >
           {NAV_ICONS.feed}
         </NavItem>
-        <NavItem label="Niños">{NAV_ICONS.ninos}</NavItem>
-        <NavItem label="Avisos">{NAV_ICONS.avisos}</NavItem>
-        <NavItem label="Mi cuenta">{NAV_ICONS.cuenta}</NavItem>
+        <NavItem
+          label="Niños"
+          active={currentPath.startsWith("/kids")}
+          href="/kids"
+        >
+          {NAV_ICONS.ninos}
+        </NavItem>
+        <NavItem label="Avisos" active={currentPath.startsWith("/notices")} href="#">
+          {NAV_ICONS.avisos}
+        </NavItem>
+        <NavItem label="Mi cuenta" active={currentPath.startsWith("/account")} href="#">
+          {NAV_ICONS.cuenta}
+        </NavItem>
       </nav>
 
       <div

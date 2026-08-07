@@ -55,7 +55,7 @@ const POSTS: FeedPost[] = [
 export default function Home() {
   return (
     <div className="flex min-h-screen bg-[var(--color-background)]">
-      <Sidebar />
+      <Sidebar currentPath="/" />
 
       <main className="flex-1 min-w-0 h-screen overflow-y-auto">
         <div

@@ -104,7 +104,7 @@ const KIDS: Kid[] = [
 export default function KidsPage() {
   return (
     <div className="flex min-h-screen bg-[var(--color-background)]">
-      <Sidebar />
+      <Sidebar currentPath="/kids" />
 
       <main className="flex-1 min-w-0 h-screen overflow-y-auto">
         <div
