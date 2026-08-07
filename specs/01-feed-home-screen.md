@@ -1,6 +1,6 @@
 # SPEC 01 — Feed (Home `/`) sin persistencia
 
-**State:** Approved
+**State:** Implementado
 **Depends on:** —
 **Date:** 2026-08-06
 
