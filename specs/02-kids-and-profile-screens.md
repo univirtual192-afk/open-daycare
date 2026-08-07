@@ -90,14 +90,14 @@ interface ParentLink {
 
 ## Acceptance criteria
 
-- [ ] `/kids` renders full list matching draft (header, search, 8 cards in 2-column grid).
-- [ ] Kid cards show correct badges (allergy, VINCULAR, or chevron).
-- [ ] Kid cards have hover lift effect.
-- [ ] Clicking a card navigates to `/kids/[id]`.
-- [ ] `/kids/[id]` renders profile matching draft (avatar, name, allergy box, info rows, parents).
-- [ ] Parent status badges show ACTIVA (green) / PENDIENTE (yellow).
-- [ ] Shared `Avatar` component reused.
-- [ ] `lint`, `tsc --noEmit`, `build` pass.
+- [x] `/kids` renders full list matching draft (header, search, 8 cards in 2-column grid).
+- [x] Kid cards show correct badges (allergy, VINCULAR, or chevron).
+- [x] Kid cards have hover lift effect.
+- [x] Clicking a card navigates to `/kids/[id]`.
+- [x] `/kids/[id]` renders profile matching draft (avatar, name, allergy box, info rows, parents).
+- [x] Parent status badges show ACTIVA (green) / PENDIENTE (yellow).
+- [x] Shared `Avatar` component reused.
+- [x] `lint`, `tsc --noEmit`, `build` pass.
 
 ## Decisiones tomadas y descartadas
 
