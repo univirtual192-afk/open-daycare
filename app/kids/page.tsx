@@ -1,6 +1,7 @@
 import { Sidebar } from "../components/feed/Sidebar";
 import { KidsSearchBar } from "../components/kids/KidsSearchBar";
 import { KidCard } from "../components/kids/KidCard";
+import { AddKidModalTrigger } from "../components/kids/AddKidModalTrigger";
 
 interface Kid {
   id: string;
@@ -122,23 +123,7 @@ export default function KidsPage() {
                 Niños
               </h1>
             </div>
-            <button
-              className="flex items-center gap-2 px-[18px] py-[11px] rounded-[14px] bg-gradient-to-b from-[#F4977E] to-[#EE8164] text-white font-extrabold text-[14.5px] shadow-[0_8px_18px_-8px_rgba(238,129,100,0.7)] cursor-pointer"
-            >
-              <svg
-                width="17"
-                height="17"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#fff"
-                strokeWidth="2.4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-              Agregar niño
-            </button>
+            <AddKidModalTrigger />
           </div>
 
           <KidsSearchBar />
