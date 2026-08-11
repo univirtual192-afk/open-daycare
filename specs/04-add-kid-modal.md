@@ -1,6 +1,6 @@
 # SPEC 04 — Add kid modal on /kids (design only)
 
-> **Status:** Aprobado
+> **Status:** Implementado
 > **Depends on:** SPEC 02
 > **Date:** 2026-08-07
 > **Objective:** Add a visual overlay modal to the `/kids` page that opens when clicking "Agregar niño", reproducing the form layout from `references/pantallas/agregar-nino.dc.html` with required/optional field indicators, closing on "Cancelar", click outside, or Escape, with purely visual fields and inert "Guardar" button.
@@ -56,24 +56,24 @@ No new data structures introduced. All fields are purely visual with placeholder
 
 ## Acceptance criteria
 
-- [ ] Clicking "Agregar niño" button on `/kids` opens the modal overlay.
-- [ ] Modal card matches draft layout (header, fields, spacing, colors, border-radius).
-- [ ] Header shows "Cancelar" (left), "Agregar niño" (center), "Guardar" (right, orange).
-- [ ] Full name field has label "NOMBRE COMPLETO *" and placeholder "Ej. Martina López".
-- [ ] Birth date field has label "FECHA DE NACIMIENTO *" and placeholder `dd/mm/aaaa`.
-- [ ] Room dropdown has label "SALA *", shows "Soles" selected, includes chevron SVG icon.
-- [ ] Allergies field has label "ALERGIAS (ETIQUETAS) (opcional)" and placeholder "Ej. Maní, Lactosa".
-- [ ] Medical notes textarea has label "NOTAS MÉDICAS (opcional)" and placeholder "Indicaciones, medicación, contactos…".
-- [ ] Required fields (name, birth date, room) show visual required indicator (`*`).
-- [ ] Optional fields (allergies, medical notes) show "(opcional)" indicator.
-- [ ] Clicking "Cancelar" closes the modal.
-- [ ] Clicking outside the modal card (on backdrop) closes the modal.
-- [ ] Pressing Escape key closes the modal.
-- [ ] "Guardar" button is inert (no action, no validation, no submission).
-- [ ] All form fields are purely visual (no state, no validation logic).
-- [ ] `npm run lint` passes without errors.
-- [ ] `npx tsc --noEmit` passes without errors.
-- [ ] `npm run build` passes without errors.
+- [x] Clicking "Agregar niño" button on `/kids` opens the modal overlay.
+- [x] Modal card matches draft layout (header, fields, spacing, colors, border-radius).
+- [x] Header shows "Cancelar" (left), "Agregar niño" (center), "Guardar" (right, orange).
+- [x] Full name field has label "NOMBRE COMPLETO *" and placeholder "Ej. Martina López".
+- [x] Birth date field has label "FECHA DE NACIMIENTO *" and placeholder `dd/mm/aaaa`.
+- [x] Room dropdown has label "SALA *", shows "Soles" selected, includes chevron SVG icon.
+- [x] Allergies field has label "ALERGIAS (ETIQUETAS) (opcional)" and placeholder "Ej. Maní, Lactosa".
+- [x] Medical notes textarea has label "NOTAS MÉDICAS (opcional)" and placeholder "Indicaciones, medicación, contactos…".
+- [x] Required fields (name, birth date, room) show visual required indicator (`*`).
+- [x] Optional fields (allergies, medical notes) show "(opcional)" indicator.
+- [x] Clicking "Cancelar" closes the modal.
+- [x] Clicking outside the modal card (on backdrop) closes the modal.
+- [x] Pressing Escape key closes the modal.
+- [x] "Guardar" button is inert (no action, no validation, no submission).
+- [x] All form fields are purely visual (no state, no validation logic).
+- [x] `npm run lint` passes without errors.
+- [x] `npx tsc --noEmit` passes without errors.
+- [x] `npm run build` passes without errors.
 
 ## Decisiones tomadas y descartadas
 
