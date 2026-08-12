@@ -30,9 +30,12 @@ Treat these as the visual spec; the app should reproduce their layout/content.
 ## MCPs
 - **Playwright**: anything Playwright-related (screenshots, traces, console logs, snapshots) must be saved under `.playwright-mcp/` (gitignored). The MCP is configured in `opencode.json`.
 - **Context7**: use to pull up-to-date framework docs (Next.js, Tailwind, React, etc.) instead of relying on memory.
+- **Supabase**: use for database operations, migrations, edge functions, logs, advisors, and schema management. Always prefer `apply_migration` for DDL operations. Run `get_advisors` after schema changes to catch missing RLS policies or security issues.
 
-## Skills - Spec Driven Development
-- `spec` and `spec-impl` are installed (see `skills-lock.json` + `.agents/skills/`). Use `spec` to design a spec for new features before coding, then `spec-impl` to implement an approved spec on its own branch.
+## Skills
+- **Spec Driven Development**: `spec` and `spec-impl` are installed (see `skills-lock.json` + `.agents/skills/`). Use `spec` to design a spec for new features before coding, then `spec-impl` to implement an approved spec on its own branch.
+- **Supabase**: load when doing ANY task involving Supabase (Database, Auth, Edge Functions, Realtime, Storage, RLS, migrations, CLI, MCP). Includes security checklist, debugging guides, and schema workflow patterns.
+- **Supabase Postgres Best Practices**: load before writing or changing anything that lives in Postgres (tables, columns, schema design, migrations, RLS policies, indexes, triggers, functions, queries). Covers query performance, connection management, security, schema design, concurrency, and monitoring.
 
 ## Agents - Subagentes personalizados
 - **spec-verifier** (`.opencode/agent/spec-verifier.md`): verifica los criterios de aceptación de un spec. Lee el spec, revisa código, ejecuta comandos (lint, tsc, build), usa Playwright para validar UI y compara screenshots. Marca los checkboxes `[x]` / `[ ]` según el resultado.

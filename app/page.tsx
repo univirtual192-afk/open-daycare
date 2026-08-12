@@ -1,7 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import { Sidebar } from "./components/feed/Sidebar";
 import { FeedHeader } from "./components/feed/FeedHeader";
 import { ComposerBox } from "./components/feed/ComposerBox";
 import { PostCard, type FeedPost } from "./components/feed/PostCard";
+import { NewPostModal } from "./components/feed/NewPostModal";
 
 const POSTS: FeedPost[] = [
   {
@@ -53,9 +57,11 @@ const POSTS: FeedPost[] = [
 ];
 
 export default function Home() {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <div className="flex min-h-screen bg-[var(--color-background)]">
-      <Sidebar currentPath="/" />
+      <Sidebar currentPath="/" onNewPostClick={() => setModalOpen(true)} />
 
       <main className="flex-1 min-w-0 h-screen overflow-y-auto">
         <div
@@ -80,6 +86,8 @@ export default function Home() {
           </div>
         </div>
       </main>
+
+      <NewPostModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </div>
   );
 }
