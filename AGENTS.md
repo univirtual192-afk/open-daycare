@@ -38,6 +38,7 @@ Treat these as the visual spec; the app should reproduce their layout/content.
 - Apply migrations via `supabase_apply_migration` — one call per migration file.
 - Seed/data migrations must be idempotent (safe to re-run without duplicating data). Use `ON CONFLICT DO NOTHING` or `WHERE NOT EXISTS` patterns.
 - Run `supabase_get_advisors` (security) after any schema change to verify RLS policies are properly configured.
+- **Spec files related to the database** must be stored in `spec/database/` (e.g., `spec/database/create_users_table.md`).
 
 ## Skills
 - **Spec Driven Development**: `spec` and `spec-impl` are installed (see `skills-lock.json` + `.agents/skills/`). Use `spec` to design a spec for new features before coding, then `spec-impl` to implement an approved spec on its own branch.

@@ -3,7 +3,7 @@
   "lsp":true,
 
   "references": {
-    "docs": "../07-DB-Schemas",
+    "db-schema": "../07-DB-Schemas",
     "description": "Schema de base de datos, tablas, columnas y referencias a crear, esto no esta implementado en la base de datos, solo es para referecnia."
   },
   
