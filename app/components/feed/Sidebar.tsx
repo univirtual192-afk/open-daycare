@@ -5,6 +5,7 @@ interface SidebarProps {
   className?: string;
   style?: CSSProperties;
   currentPath?: string;
+  onNewPostClick?: () => void;
 }
 
 function LogoMark() {
@@ -119,7 +120,7 @@ const NAV_ICONS = {
   ),
 };
 
-export function Sidebar({ className = "", style, currentPath = "" }: SidebarProps) {
+export function Sidebar({ className = "", style, currentPath = "", onNewPostClick }: SidebarProps) {
   return (
     <aside
       className={`flex flex-col px-4 py-6 sticky top-0 h-screen ${className}`}
@@ -151,6 +152,10 @@ export function Sidebar({ className = "", style, currentPath = "" }: SidebarProp
 
       <Link
         href="#"
+        onClick={(e) => {
+          e.preventDefault();
+          onNewPostClick?.();
+        }}
         className="flex items-center justify-center gap-2 w-full px-3 py-3 rounded-[14px] text-white font-extrabold text-[14.5px] mb-[18px] transition-opacity hover:opacity-90"
         style={{
           background: "linear-gradient(180deg,#F4977E,#EE8164)",
