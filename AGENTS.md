@@ -32,6 +32,13 @@ Treat these as the visual spec; the app should reproduce their layout/content.
 - **Context7**: use to pull up-to-date framework docs (Next.js, Tailwind, React, etc.) instead of relying on memory.
 - **Supabase**: use for database operations, migrations, edge functions, logs, advisors, and schema management. Always prefer `apply_migration` for DDL operations. Run `get_advisors` after schema changes to catch missing RLS policies or security issues.
 
+## Supabase Client Helpers
+- **Packages**: `@supabase/supabase-js` and `@supabase/ssr` are installed for Next.js integration.
+- **Server Components**: use `utils/supabase/server.ts` (`createClient(cookieStore)`) for Server Component database queries.
+- **Client Components**: use `utils/supabase/client.ts` (`createClient()`) for browser-side database interactions.
+- **Middleware**: use `utils/supabase/middleware.ts` (`createClient(request)`) for session refresh and auth guards in `middleware.ts`.
+- Always use these helpers instead of instantiating `createClient` directly from `@supabase/supabase-js`.
+
 ## Database Migrations
 - **Always use migrations** for any database manipulation (CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, RLS policies, extensions). Never use `supabase_execute_sql` for schema or data changes that should persist.
 - Migration files go in `supabase/migrations/` with a timestamp prefix (e.g., `20260813020000_create_daycares_table.sql`).
