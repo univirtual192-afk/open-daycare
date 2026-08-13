@@ -32,6 +32,13 @@ Treat these as the visual spec; the app should reproduce their layout/content.
 - **Context7**: use to pull up-to-date framework docs (Next.js, Tailwind, React, etc.) instead of relying on memory.
 - **Supabase**: use for database operations, migrations, edge functions, logs, advisors, and schema management. Always prefer `apply_migration` for DDL operations. Run `get_advisors` after schema changes to catch missing RLS policies or security issues.
 
+## Database Migrations
+- **Always use migrations** for any database manipulation (CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, RLS policies, extensions). Never use `supabase_execute_sql` for schema or data changes that should persist.
+- Migration files go in `supabase/migrations/` with a timestamp prefix (e.g., `20260813020000_create_daycares_table.sql`).
+- Apply migrations via `supabase_apply_migration` — one call per migration file.
+- Seed/data migrations must be idempotent (safe to re-run without duplicating data). Use `ON CONFLICT DO NOTHING` or `WHERE NOT EXISTS` patterns.
+- Run `supabase_get_advisors` (security) after any schema change to verify RLS policies are properly configured.
+
 ## Skills
 - **Spec Driven Development**: `spec` and `spec-impl` are installed (see `skills-lock.json` + `.agents/skills/`). Use `spec` to design a spec for new features before coding, then `spec-impl` to implement an approved spec on its own branch.
 - **Supabase**: load when doing ANY task involving Supabase (Database, Auth, Edge Functions, Realtime, Storage, RLS, migrations, CLI, MCP). Includes security checklist, debugging guides, and schema workflow patterns.
