@@ -1,6 +1,6 @@
 # SPEC 06 — Daycares table migration with RLS and seed data
 
-> **Status:** Accepted
+> **Status:** Implemented
 > **Depends on:** None
 > **Date:** 2026-08-12
 > **Objective:** Create the `daycares` table in Supabase via migration pattern, enable UUID generation, apply Row Level Security policies, and seed four initial daycare records.
