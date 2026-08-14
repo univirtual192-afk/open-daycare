@@ -1,11 +1,22 @@
+"use client";
+
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import { SignOutButton } from "@/app/components/auth/SignOutButton";
+import { NewPostButton } from "@/app/components/feed/NewPostButton";
+
+export interface SidebarUser {
+  fullName: string;
+  role: string;
+  daycareName?: string;
+}
 
 interface SidebarProps {
   className?: string;
   style?: CSSProperties;
   currentPath?: string;
   onNewPostClick?: () => void;
+  user?: SidebarUser;
 }
 
 function LogoMark() {
@@ -120,7 +131,11 @@ const NAV_ICONS = {
   ),
 };
 
-export function Sidebar({ className = "", style, currentPath = "", onNewPostClick }: SidebarProps) {
+export function Sidebar({ className = "", style, currentPath = "", onNewPostClick, user }: SidebarProps) {
+  const initial = user?.fullName?.charAt(0).toUpperCase() ?? "?";
+  const roleLabel = user?.role === "staff" ? "Maestra" : user?.role === "admin" ? "Admin" : "Familia";
+  const daycareLabel = user?.daycareName ?? "Soles";
+
   return (
     <aside
       className={`flex flex-col px-4 py-6 sticky top-0 h-screen ${className}`}
@@ -150,32 +165,7 @@ export function Sidebar({ className = "", style, currentPath = "", onNewPostClic
         </div>
       </Link>
 
-      <Link
-        href="#"
-        onClick={(e) => {
-          e.preventDefault();
-          onNewPostClick?.();
-        }}
-        className="flex items-center justify-center gap-2 w-full px-3 py-3 rounded-[14px] text-white font-extrabold text-[14.5px] mb-[18px] transition-opacity hover:opacity-90"
-        style={{
-          background: "linear-gradient(180deg,#F4977E,#EE8164)",
-          boxShadow: "0 8px 18px -8px rgba(238,129,100,.75)",
-        }}
-      >
-        <svg
-          width="17"
-          height="17"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#fff"
-          strokeWidth="2.4"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M12 5v14M5 12h14" />
-        </svg>
-        Nueva publicación
-      </Link>
+      <NewPostButton onClick={() => onNewPostClick?.()} />
 
       <nav className="flex flex-col gap-1 flex-1">
         <NavItem
@@ -206,45 +196,28 @@ export function Sidebar({ className = "", style, currentPath = "", onNewPostClic
       >
         <div className="flex items-center gap-[11px] px-2 py-1.5">
           <div
-            className="flex flex-none items-center justify-center rounded-full text-[var(--color-avatar-caro)]"
+            className="flex flex-none items-center justify-center rounded-full"
             style={{
               width: 38,
               height: 38,
-              background: "var(--color-avatar-caro-bg)",
+              background: "linear-gradient(155deg,#F8C3A8,#F2937A)",
+              color: "#fff",
               fontFamily: "var(--font-fredoka)",
               fontWeight: 600,
               fontSize: 16,
             }}
           >
-            C
+            {initial}
           </div>
           <div className="flex-1 min-w-0">
             <div className="font-extrabold text-[14px] text-[var(--color-text)]">
-              Caro Giménez
+              {user?.fullName ?? "Usuario"}
             </div>
             <div className="text-[12px] text-[var(--color-text-ghost)]">
-              Maestra · Soles
+              {roleLabel} · {daycareLabel}
             </div>
           </div>
-          <a
-            href="#"
-            title="Cerrar sesión"
-            className="flex flex-none items-center justify-center rounded-[10px] bg-[var(--color-background)] text-[var(--color-text-faint)] transition-colors hover:text-[var(--color-primary)]"
-            style={{ width: 32, height: 32 }}
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
-            </svg>
-          </a>
+          <SignOutButton />
         </div>
       </div>
     </aside>
