@@ -1,4 +1,4 @@
-import { Sidebar } from "../components/feed/Sidebar";
+import { SidebarWithUser } from "../components/feed/SidebarWithUser";
 import { KidsSearchBar } from "../components/kids/KidsSearchBar";
 import { KidCard } from "../components/kids/KidCard";
 import { AddKidModalTrigger } from "../components/kids/AddKidModalTrigger";
@@ -105,7 +105,7 @@ const KIDS: Kid[] = [
 export default function KidsPage() {
   return (
     <div className="flex min-h-screen bg-[var(--color-background)]">
-      <Sidebar currentPath="/kids" />
+      <SidebarWithUser currentPath="/kids" />
 
       <main className="flex-1 min-w-0 h-screen overflow-y-auto">
         <div

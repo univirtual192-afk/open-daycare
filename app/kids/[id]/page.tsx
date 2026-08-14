@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Sidebar } from "../../components/feed/Sidebar";
+import { SidebarWithUser } from "../../components/feed/SidebarWithUser";
 import { KidProfileHeader } from "../../components/kids/KidProfileHeader";
 import { AllergyBox } from "../../components/kids/AllergyBox";
 import { InfoRows } from "../../components/kids/InfoRows";
@@ -224,7 +224,7 @@ export default async function KidProfilePage({ params }: { params: Promise<{ id:
 
   return (
     <div className="flex min-h-screen bg-[var(--color-background)]">
-      <Sidebar currentPath="/kids" />
+      <SidebarWithUser currentPath="/kids" />
 
       <main className="flex-1 min-w-0 h-screen overflow-y-auto">
         <div

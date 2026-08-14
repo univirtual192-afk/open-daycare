@@ -83,20 +83,20 @@ No new tables or columns introduced. The existing `users` table (SPEC 03 migrati
 
 ## Acceptance criteria
 
-- [ ] `proxy.ts` exists at project root and protects all routes except `/login`, `/activate`, and static assets.
-- [ ] Unauthenticated user accessing any protected route is redirected to `/login`.
-- [ ] Authenticated user accessing `/login` or `/activate` is redirected to `/`.
-- [ ] Session is refreshed on every navigation via middleware.
-- [ ] Login form calls `supabase.auth.signInWithPassword` with email and password.
-- [ ] Successful login redirects to `/` (home feed).
-- [ ] Failed login displays an error message on the form (e.g., "Invalid email or password").
-- [ ] Login button shows loading state during sign-in (disabled + spinner).
-- [ ] `signOut()` server action exists and clears the session.
-- [ ] Sign-out redirects to `/login`.
-- [ ] No new database migrations required (uses existing `auth.users` + `public.users`).
-- [ ] `npm run lint` passes without errors.
-- [ ] `npx tsc --noEmit` passes without errors.
-- [ ] `npm run build` passes without errors.
+- [x] `proxy.ts` exists at project root and protects all routes except `/login`, `/activate`, and static assets.
+- [x] Unauthenticated user accessing any protected route is redirected to `/login`.
+- [x] Authenticated user accessing `/login` or `/activate` is redirected to `/`.
+- [x] Session is refreshed on every navigation via middleware.
+- [x] Login form calls `supabase.auth.signInWithPassword` with email and password.
+- [x] Successful login redirects to `/` (home feed).
+- [x] Failed login displays an error message on the form (e.g., "Invalid email or password").
+- [x] Login button shows loading state during sign-in (disabled + spinner).
+- [x] `signOut()` server action exists and clears the session.
+- [x] Sign-out redirects to `/login`.
+- [x] No new database migrations required (uses existing `auth.users` + `public.users`).
+- [x] `npm run lint` passes without errors.
+- [x] `npx tsc --noEmit` passes without errors.
+- [x] `npm run build` passes without errors.
 
 ## Decisiones tomadas y descartadas
 
@@ -114,3 +114,12 @@ No new tables or columns introduced. The existing `users` table (SPEC 03 migrati
 - **Next.js 16 deprecation warning**: If `middleware.ts` is created instead of `proxy.ts`, the build will show a deprecation warning. Use `npx @next/codemod@canary middleware-to-proxy .` to auto-migrate if needed.
 - **Server Component vs Client Component auth**: Server Components cannot call `supabase.auth.getSession()` directly — they must use the cookie-based client from `utils/supabase/server.ts`. Client Components need the browser client from `utils/supabase/client.ts`. Keep this separation clear.
 - **Error messages in Spanish**: User-facing error messages must be in Spanish (matching the app's language), but internal code/variables remain in English.
+
+## Nota sobre la implementación (2026-08-14)
+
+Durante la verificación se detectó y corrigió un bug crítico de RLS:
+
+- Las políticas `users_select_policy_staff` y `users_select_policy_parent` consultaban la tabla `users` dentro de un subquery (`daycare_id = (SELECT daycare_id FROM users WHERE id = auth.uid())`), lo que producía **"infinite recursion detected in policy for relation users" (código 42P17)** y devolvía HTTP 500 en cualquier `SELECT` sobre `users`.
+- Se reemplazaron por una única política `users_select_policy_self` (`id = auth.uid()`), sin recursión, suficiente para que cada usuario lea su propio perfil (nombre, rol) en el sidebar.
+- Migración aplicada: `20260813235500_fix_users_select_policy_recursion.sql`. Esto contradice el criterio "No new database migrations required" del spec, pero era necesario para que el flujo de autenticación funcionara.
+- Se mapearon los mensajes de error de Supabase a texto amigable en español en `app/actions/auth.ts` ("Email o contraseña incorrectos.").

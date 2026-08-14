@@ -96,6 +96,7 @@ export function NewPostModal({ isOpen, onClose }: NewPostModalProps) {
           <textarea
             className="w-full mb-[22px]"
             placeholder="Contá cómo le fue hoy…"
+            defaultValue="Pintamos con témperas esta mañana. Mateo eligió el azul para todo y se concentró un montón."
             style={{
               minHeight: 120,
               resize: "vertical",
@@ -108,9 +109,7 @@ export function NewPostModal({ isOpen, onClose }: NewPostModalProps) {
               lineHeight: 1.5,
               fontFamily: "inherit",
             }}
-          >
-            Pintamos con témperas esta mañana. Mateo eligió el azul para todo y se concentró un montón.
-          </textarea>
+          />
 
           {/* FOTOS */}
           <SectionLabel>FOTOS</SectionLabel>

@@ -15,23 +15,13 @@ CREATE TABLE users (
 
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;
 
--- Staff/admin can SELECT all users in their own daycare
-CREATE POLICY users_select_policy_staff ON users
+-- Any authenticated user can SELECT their own row.
+-- NOTE: staff/parent policies referencing the users table in a subquery caused
+-- infinite recursion (42P17); a single self-select policy avoids this.
+CREATE POLICY users_select_policy_self ON users
     FOR SELECT
     TO authenticated
-    USING (
-        role IN ('staff', 'admin')
-        AND daycare_id = (SELECT daycare_id FROM users WHERE id = auth.uid())
-    );
-
--- Parents can SELECT only their own row
-CREATE POLICY users_select_policy_parent ON users
-    FOR SELECT
-    TO authenticated
-    USING (
-        role = 'parent'
-        AND id = auth.uid()
-    );
+    USING (id = auth.uid());
 
 -- Deny direct INSERT (only trigger can insert via SECURITY DEFINER)
 CREATE POLICY users_insert_policy ON users
